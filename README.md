@@ -141,7 +141,10 @@ To run the project, execute the following command:
 
 ### Run Tests
 
-To run the tests, execute the following command: <br>
+You can run tests to check for linter errors by running the following commands: <br/>
+
+npx stylelint "**/*.{css,scss}" for testing css errors
+npx eslint "**/*.{js,jsx}" for Javascript errors
 
 
 ### Deployment
