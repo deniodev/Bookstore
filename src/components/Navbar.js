@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => (
-  <nav>
+  <nav className="navbar">
     <h1>Bookstore CMS</h1>
     <ul>
       <li>

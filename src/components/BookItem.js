@@ -1,25 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
-const BookItem = () => (
+const BookItem = ({ title, author }) => (
   <div>
     <li>
-      The Hunger Games
-      <span>Suzanne Collins</span>
-      <button type="button">Delete</button>
-    </li>
-    <li>
-      Dune
-      <span>Frank Herbet</span>
-      <button type="button">Delete</button>
-    </li>
-    <li>
-      Capital in the Twenty-First Century
-      <span>Suzanne Collins</span>
-      <button type="button">Delete</button>
-    </li>
-    <li>
-      Da Vinci Code
-      <span>Dan Brown</span>
+      <h3>
+        {title}
+        ,
+      </h3>
+      <span>
+        {author}
+      </span>
       <button type="button">Delete</button>
     </li>
   </div>
