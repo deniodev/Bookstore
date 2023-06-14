@@ -2,14 +2,26 @@ body {
   background-color: white;
 }
 
+ul {
+  list-style: none;
+}
+
 .navbar,
 .navbar ul {
   display: flex;
   flex-direction: row;
-  list-style: none;
   gap: 5px;
+  margin-left: 40px;
 }
 
-button {
-  margin-left: 5px;
+form {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-left: 40px;
+  gap: 0.5rem;
+}
+
+.category {
+  font-style: italic;
 }
