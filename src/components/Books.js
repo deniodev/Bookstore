@@ -11,10 +11,11 @@ const Books = () => {
     dispatch(getBooks());
   }, [dispatch]);
   const allBooks = useSelector((state) => state.books.books);
+
   return (
     <div>
       <ul>
-        {allBooks.map(((book) => (
+        {allBooks.map((book) => (
           <BookItem
             key={book.id}
             title={book.title}
@@ -22,7 +23,7 @@ const Books = () => {
             category={book.category}
             id={book.id}
           />
-        )))}
+        ))}
       </ul>
       <AddBook />
     </div>
