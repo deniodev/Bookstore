@@ -1,52 +1,51 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { addBook } from '../redux/book/booksSlice';
+import { useDispatch } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadBook } from '../redux/book/booksSlice';
 
 const AddBook = () => {
-  const [data, setData] = useState({ title: '', author: '' });
-  const { books } = useSelector((store) => store.book);
   const dispatch = useDispatch();
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-      item_id: `item${books.length + 1}`,
-    }));
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+
+  const handleSubmit = () => {
+    const bookInfo = {
+      item_id: uuidv4(),
+      title,
+      author,
+      category: 'Fiction',
+    };
+    dispatch(uploadBook(bookInfo));
+    setTitle('');
+    setAuthor('');
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (data.title.trim() && data.author.trim()) {
-      dispatch(addBook(data));
-      setData({ title: '', author: '' });
-    }
-  };
   return (
-    <div>
-      <form>
-        <input
-          type="text"
-          placeholder="Book title"
-          name="title"
-          value={data.title}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          placeholder="Book Author"
-          name="author"
-          value={data.author}
-          onChange={handleChange}
-        />
-        <button
-          type="submit"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </form>
-    </div>
+    <form>
+      <input
+        type="text"
+        placeholder="Book title"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Book Author"
+        name="author"
+        value={author}
+        onChange={(e) => setAuthor(e.target.value)}
+        required
+      />
+      <input
+        type="submit"
+        value="ADD BOOK"
+        onClick={(e) => {
+          e.preventDefault();
+          handleSubmit();
+        }}
+      />
+    </form>
   );
 };
 
