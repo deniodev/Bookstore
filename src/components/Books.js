@@ -13,7 +13,7 @@ const Books = () => {
   const allBooks = useSelector((state) => state.books.books);
 
   return (
-    <div>
+    <div className="booksContainer">
       <ul>
         {allBooks.map((book) => (
           <BookItem

@@ -1,48 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-// import Button from './Button';
+import { CircularProgressbar } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 import { deleteBook } from '../redux/book/booksSlice';
 
 const BookItem = (props) => {
-  const {
-    id, title, author, category,
-  } = props;
+  const { id, title, author } = props;
   const dispatch = useDispatch();
+  const [progress, setProgress] = useState(50);
+
+  const handlepercentage = () => {
+    let percentage = progress;
+    if (percentage < 100) {
+      setProgress(percentage += 1);
+    }
+  };
+
   return (
-    <div>
-      <li>
-        <h3>
-          {title}
-        </h3>
-        <p>
-          {author}
-        </p>
-        <p className="category">
-          {category}
-        </p>
+    <li className="book">
+      <div className="detail-actions">
+        <div className="bookDetails">
+          <span className="category">Fiction</span>
+          <span className="title">{title}</span>
+          <span className="author">{author}</span>
+        </div>
+        <div className="actions">
+          <button type="button" className="comment actionBtn">Comments</button>
+          <button
+            type="submit"
+            className="removeBook actionBtn"
+            onClick={() => dispatch(deleteBook(id))}
+          >
+            Remove
+          </button>
+          <button type="button" className="actionBtn">Edit</button>
+        </div>
+      </div>
+      <div className="percentage">
+        <CircularProgressbar
+          value={progress}
+          className="progressBar"
+        />
+        <div className="numberPercentage">
+          <span>
+            {progress}
+            %
+          </span>
+          <p>Completed</p>
+        </div>
+      </div>
+      <div className="progressSection">
+        <h2 className="currentChapter">CURRENT CHAPTER</h2>
+        <p className="chapter">Chapter 5</p>
         <button
-          type="submit"
-          onClick={() => dispatch(deleteBook(id))}
+          type="button"
+          onClick={handlepercentage}
+          className="updateProgress"
         >
-          Remove
+          UPDATE PROGRESS
         </button>
-      </li>
-    </div>
+      </div>
+    </li>
   );
 };
-
 BookItem.propTypes = {
-  title: PropTypes.string,
-  author: PropTypes.string,
-  category: PropTypes.string,
-  id: PropTypes.string,
-};
-BookItem.defaultProps = {
-  title: null,
-  author: null,
-  category: null,
-  id: null,
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
 };
 
 export default BookItem;
